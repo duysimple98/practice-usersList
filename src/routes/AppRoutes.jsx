@@ -4,7 +4,6 @@ import Login from "../components/Login";
 import PrivateRoutes from "./PrivateRoutes";
 import NotFound from "./NotFound";
 import TableUsers from "../components/TableUsers";
-import GetLovepik from "../components/getLovepik";
 
 const AppRoutes = () => {
   return (
@@ -12,7 +11,6 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/getlink" element={<GetLovepik />} />
         <Route
           path="/users"
           element={

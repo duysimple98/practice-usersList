@@ -1,0 +1,78 @@
+a.active {
+  color: #f61e41 !important;
+}
+
+.home-container {
+  min-height: 500px;
+  padding: 20px 0;
+  pre {
+    white-space: pre-wrap;
+  }
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  .title {
+    text-align: center;
+    font-size: 30px;
+  }
+  .label-text {
+    font-weight: 500;
+  }
+  .go-back {
+    display: flex;
+    gap: 8px;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: black;
+  }
+  input {
+    padding: 10px;
+    color: #3e3b3b;
+    border: 1px solid #e9f5f9;
+    background-color: #e9f5f9;
+    border-radius: 6px;
+    width: 100%;
+    outline: none;
+    &:focus {
+      border: 1px solid #92cbdf;
+    }
+    &::placeholder {
+      color: gray;
+      opacity: 0.5;
+    }
+  }
+  .input-pass {
+    position: relative;
+    i {
+      position: absolute;
+      top: 30%;
+      right: 5%;
+      cursor: pointer;
+    }
+    input {
+      padding: 10px 50px 10px 10px;
+    }
+  }
+  button {
+    color: white;
+    padding: 10px 0;
+    margin: 12px 0;
+    font-size: 18px;
+    background-color: #f8ddde;
+    border: none;
+    border-radius: 8px;
+    &.active {
+      background-color: #fa3d40;
+      pointer-events: all;
+    }
+  }
+  button[disabled="disabled"],
+  button:disabled {
+    cursor: not-allowed;
+  }
+}

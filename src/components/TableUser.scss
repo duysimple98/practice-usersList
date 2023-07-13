@@ -1,0 +1,19 @@
+.sort-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  i {
+    cursor: pointer;
+    padding: 0 2px;
+  }
+}
+
+.add-new {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pagination {
+  justify-content: center;
+}

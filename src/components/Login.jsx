@@ -1,17 +1,18 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { loginApi } from "../services/UserService";
 import { toast } from "react-toastify";
-import { UserContext } from "../context/UserContext";
+import { useDispatch, useSelector } from "react-redux";
+import { handleLoginRedux } from "../redux/actions/userAction";
 
 const Login = () => {
-  const { loginContext, user } = useContext(UserContext);
+  const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isShowPassword, setIsShowPassword] = useState(false);
 
-  const [loadingAPI, setLoadingAPI] = useState(false);
+  const isLoading = useSelector((state) => state.user.isLoading);
+  const account = useSelector((state) => state.user.account);
 
   const navigate = useNavigate();
 
@@ -19,17 +20,8 @@ const Login = () => {
     if (!email || !password) {
       toast.error("Email/Password is required!");
     }
-    setLoadingAPI(true);
-    let res = await loginApi(email.trim(), password);
-    if (res && res.token) {
-      loginContext(email, res.token);
-      navigate("/");
-    } else {
-      if (res && res.status === 400) {
-        toast.error(res.data.error);
-      }
-    }
-    setLoadingAPI(false);
+
+    dispatch(handleLoginRedux(email, password));
   };
 
   useEffect(() => {
@@ -45,6 +37,12 @@ const Login = () => {
       handleLogin();
     }
   };
+
+  useEffect(() => {
+    if (account && account.auth === true) {
+      navigate("/");
+    }
+  }, [account]);
 
   return (
     <div className="login-container col-lg-4 col-sm-6 col-12 mx-auto my-3">
@@ -70,11 +68,11 @@ const Login = () => {
         />
       </div>
       <button
-        className={email && password && !loadingAPI ? "active" : ""}
-        disabled={!email || !password || loadingAPI}
+        className={email && password && !isLoading ? "active" : ""}
+        disabled={!email || !password || isLoading}
         onClick={() => handleLogin()}
       >
-        {loadingAPI && <i className="fa-solid fa-sync fa-spin" />}
+        {isLoading && <i className="fa-solid fa-sync fa-spin" />}
         <span>&nbsp;Login</span>
       </button>
       <div className="w-full mx-auto">
